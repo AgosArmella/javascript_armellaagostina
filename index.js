@@ -57,7 +57,7 @@ const cuota = ((monto + (monto*interes))/100)/meses
 return cuota
 }
 alert(
-    'Las opciones que te ofrece  '
+    `Las opciones que te ofrece ${InfoBanco.nombre} son: 1. ${cuota12} mensuales a 12 meses -2. ${cuota24} mensuales a 24 meses -3. ${cuota36} mensuales a 36 meses`
 )
 console.log('InfoBanco', InfoBanco, montosolicitado)
 
