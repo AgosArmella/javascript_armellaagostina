@@ -10,54 +10,47 @@ class Banco {
     }
 }
 
-const BancoPatagonia = new Banco('Banco Patagonia', 1, 3, 10, 15)
-const Credicoop = new Banco('Banco Credicoop', 2, 10, 12, 15)
-const Ciudad = new Banco('Banco Ciudad', 3, 5, 9, 11)
-const Nacion = new Banco('Banco Nacion', 4, 5, 10, 20)
-
-console.log(BancoPatagonia, Credicoop, Ciudad, Nacion)
+const bancos = [
+    new Banco('Banco Patagonia', 1, 3, 10, 15),
+    new Banco('Banco Credicoop', 2, 10, 12, 15),
+    new Banco('Banco Ciudad', 3, 5, 9, 11),
+    new Banco('Banco Nacion', 4, 5, 10, 20)
+]
 
 let BancoDeseado = parseInt(
     prompt('Escoge el numero del Banco que desea cotizar 1.Banco Patagonia - 2.Banco Credicoop - 3.Banco Ciudad - 4.Banco Nacion')
 )
 
 let Bancoescogido = false
-let InfoBanco
+let banco
 
 while (Bancoescogido === false) {
-    if (BancoDeseado === 1) {
-        Bancoescogido = true
-        InfoBanco = BancoPatagonia
-    } else if (BancoDeseado === 2) {
-        Bancoescogido = true
-        InfoBanco = Credicoop
-    } else if (BancoDeseado === 3) {
-        Bancoescogido = true
-        InfoBanco = Ciudad
-    } else if (BancoDeseado === 4) {
-        Bancoescogido = true
-        InfoBanco = Nacion
-    } else {
+    banco = bancos.find((banco => banco.id === BancoDeseado))
+    if (!banco) {
         BancoDeseado = parseInt(
             prompt('Escoge el numero correcto del Banco que desea cotizar 1.Banco Patagonia - 2.Banco Credicoop - 3.Banco Ciudad - 4.Banco Nacion')
         )
+    } else {
+        Bancoescogido = true
     }
 }
+console.log(banco);
 
 const montosolicitado = parseInt(
-    prompt('Ingresa el monto que deseas solicitar')
+   prompt('Ingresa el monto que deseas solicitar')
 )
-const cuota12 = calcularCuota(montosolicitado,InfoBanco.tasa12,12)
-const cuota24 = calcularCuota(montosolicitado,InfoBanco.tasa12,24)
-const cuota36 = calcularCuota(montosolicitado,InfoBanco.tasa12,36)
-console.log(cuota12,cuota24,cuota36)
 
-function calcularCuota (monto, interes, meses){
-const cuota = ((monto + (monto*interes))/100)/meses
-return cuota
+const cuota12 = calcularCuota(montosolicitado, banco.tasa12, 12)
+const cuota24 = calcularCuota(montosolicitado, banco.tasa12, 24)
+const cuota36 = calcularCuota(montosolicitado, banco.tasa12, 36)
+
+function calcularCuota(monto, interes, meses) {
+    const cuota = ((monto + (monto * interes)) / 100) / meses
+    return cuota
 }
+
 alert(
-    `Las opciones que te ofrece ${InfoBanco.nombre} son: 1. ${cuota12} mensuales a 12 meses -2. ${cuota24} mensuales a 24 meses -3. ${cuota36} mensuales a 36 meses`
+    `Las opciones que te ofrece ${banco.nombre} son: 1. ${cuota12} mensuales a 12 meses -2. ${cuota24} mensuales a 24 meses -3. ${cuota36} mensuales a 36 meses`
 )
-console.log('InfoBanco', InfoBanco, montosolicitado)
+
 
