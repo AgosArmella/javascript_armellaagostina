@@ -1,0 +1,28 @@
+{
+    "productos": [
+      {
+        "id": 1,
+        "nombre": "Iphone",
+        "precio": 100000,
+        "descripcion": "Producto 1"
+      },
+      {
+        "id": 2,
+        "nombre": "Tablet",
+        "precio": 80000,
+        "descripcion": "Producto 2"
+      },
+      {
+        "id": 3,
+        "nombre": "Tv",
+        "precio": 150000,
+        "descripcion": "Producto 2"
+      },
+      {
+        "id": 4,
+        "nombre": "Airpods",
+        "precio": 20000,
+        "descripcion": "Producto 2"
+      }
+    ]
+}
