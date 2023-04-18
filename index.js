@@ -30,7 +30,7 @@ class Producto {
 }
 
 async function getProductos() {
-    const response = await fetch('./productos.json');
+    const response = await fetch('productos.json');
     const resultado = await response.json();
     console.log(resultado.productos); 
     return resultado.productos;
@@ -54,21 +54,36 @@ const selectNode = document.querySelector('#listaprods')
 const anadirBtnNode = document.querySelector('#anadirprods')
 anadirBtnNode.onclick = () => {
     const index = selectNode.selectedIndex
-    const Prodseleccionado = Producto[index]
-    carrito.push(Prodseleccionado)
-    toastr.success(`${producto.nombre} agregado al carrito`,'Mensaje');
+    const productos = Array.from(selectNode.children)
+    const Prodseleccionado = productos[index]
+    carrito.push(new Producto(Prodseleccionado.getAttribute('id'), Prodseleccionado.innerText.split(':')[0].trim(), parseInt(Prodseleccionado.innerText.split(':')[1].trim().replace('$',''))))
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+    Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
     console.log(carrito)
 }
+
 
 const finalizarBtnNode = document.querySelector('#finalizarcompra')
 finalizarBtnNode.onclick = () => {
     let totalcompra = 0
-    carrito.forEach((Producto) => {
+    carrito.forEach((Productos) => {
         totalcompra = totalcompra + Productos.precio
     })
     alert(
         `El total de tu compra es ${totalcompra}`
     )
 }
-
-
